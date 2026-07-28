@@ -14,7 +14,7 @@
 - Rotations are the same in every Minecraft world so seeds aren't needed
 - If you are confused about how blocks are rotated in Minecraft, use `./directional_resource_pack/directional_resource_pack.zip`
 - While some blocks are rotated at 0°, 90°, 180°, 270°; others are rotated and mirrored - 0°, M0°, 180°, M180°
-- Blocks that are rotated and mirrored, can be observed from the sides and that's what green blocks are for.
+- Blocks that are rotated and mirrored, can be observed from sides and that's what green blocks are for.
 - Uses OpenCL with GPU for ultra-fast searching
 
 ### Building
