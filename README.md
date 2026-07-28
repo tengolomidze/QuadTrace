@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://github.com/tengolomidze/QuadTrace/blob/main/web/img/icon.png?raw=true" alt="QuadTrace-logo" width="15%"/>
+  <img src="https://github.com/tengolomidze/QuadTrace/blob/main/web/img/icon.png?raw=true" alt="QuadTrace-logo" width="20%"/>
 </p>
 <h1 align="center">QuadTrace</h1>
 <p align="center">Utility for finding block rotation patterns across whole Minecraft world.</p>
