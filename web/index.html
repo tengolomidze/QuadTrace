@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" href="img/icon.png">
+        <title>QuadTrace</title>
+
+        <link rel="stylesheet" href="style.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    </head>
+
+    <body>
+        <div class="game-wrapper">
+            <div class="compass-div"></div>
+            <p class="best-radius-div">Enough to find in <span class="best-radius" style="color:cadetblue; font-size: 24px; font-weight: 600;">0</span> blocks radius</p>
+            <div class="instructions">
+                <strong>Controls:</strong><br>
+                Left Click: Place block<br>
+                Shift+Click: Remove block<br>
+                Drag: Rotate camera<br>
+                Shift+Drag: Move camera<br>
+                Scroll: Zoom
+            </div>
+        </div>
+
+        <div class="panel">
+            <div class="tools">
+                <div class="block-picker">
+                    <button class="block block-0"><img src="img/forward.png"><p>W</p></button>
+                    <button class="block block-1"><img src="img/right.png"><p>D</p></button>
+                    <button class="block block-2"><img src="img/backwards.png"><p>S</p></button>
+                </div>
+                <div class="block-picker">
+                    <button class="block block-3"><img src="img/left.png"><p>A</p></button>
+                    <button class="block block-5"><img src="img/mirrored.png"><p>Q</p></button>
+                    <button class="block block-4"><img src="img/not_mirrored.png" ><p>E</p></button>
+                </div>
+                <button class="clear-all">Clear All</button>
+                <div class="rotations">
+                    <button class="rotate-left">↺</button>
+                    <button class="rotate-right">↻</button>
+                </div>
+                
+                <div class="search-inputs">
+                    <div style="flex-direction: row; gap: 10px;">
+                        <div>
+                            <label>yMin</label>
+                            <input type="number" class="search-yMin" value="-64">
+                        </div>
+                        <div>
+                            <label>yMax</label>
+                            <input type="number" class="search-yMax" value="320">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label>Search Radius</label>
+                        <input type="number" class="search-radius" value="1000000">
+                    </div>
+                    <div>
+                        <label>Tiles Size <span style="font-size: 8px;">(Chunk size in a single thread)</span></label>
+                        <input type="number" class="search-tiles" value="4096">
+                    </div>
+                    <div class="search-button-group">
+                        <button class="search-btn">Search</button>
+                        <button class="stop-btn" style="display: none;">Stop</button>
+                    </div>
+                </div>
+
+                <div class="search-console">
+                    <div class="console-header">Console</div>
+                    <div class="progress-section" style="display: none;">
+                        <div class="progress-label">Progress</div>
+                        <div class="progress-bar-track">
+                            <div class="progress-bar-fill"></div>
+                        </div>
+                        <div class="progress-text">0%</div>
+                    </div>
+                    <div class="console-output"></div>
+                </div>
+
+                <div class="credentials">
+                    <div class="cred-item">
+                        <span class="cred-label">Developer:</span>
+                        <span class="cred-value">Tengo Lomidze</span>
+                    </div>
+                    <div class="cred-item">
+                        <span class="cred-label">Discord:</span>
+                        <span class="cred-value">#crig2181</span>
+                    </div>
+                    <div class="cred-item">
+                        <span class="cred-label">Mail:</span>
+                        <span class="cred-value">tengolomidzedev@gmail.com</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+    
+    <script src="script.js"></script>
+</html>
