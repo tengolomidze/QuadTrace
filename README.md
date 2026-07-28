@@ -34,4 +34,4 @@
 - Email: tengolomidzedev@gmail.com
 
 ### Keywords
-rotation patter finder, base hunting, griefing, minecraft servers, 2b2t,
+minecraft block rotation patter finder, base hunting, griefing, minecraft servers, 2b2t,
