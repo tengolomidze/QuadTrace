@@ -22,7 +22,7 @@
 -   `cd QuadTrace`
 -   `pip install -r requirements.txt`
 -   `python server.py`
-- Open Webpage on `http://127.0.0.1:8000`
+- Open Webpage on `http://127.0.0.1:9000`
 
 ### Preview
 <p align="center">

@@ -20,8 +20,8 @@ WEB_DIR = ROOT / "web"
 EXE_DIR = ROOT / "cpp" / "x64" / "Release"
 
 HOST = "127.0.0.1"
-HTTP_PORT = 8000
-WS_PORT = 8001
+HTTP_PORT = 9000
+WS_PORT = 9001
 
 active_process: Optional[subprocess.Popen[str]] = None
 process_lock = asyncio.Lock()

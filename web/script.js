@@ -202,7 +202,7 @@ const enableControls = () => {
 const connectSocket = () => {
     if (socket && socket.readyState === WebSocket.OPEN) return socket;
 
-    socket = new WebSocket('ws://127.0.0.1:8001');
+    socket = new WebSocket('ws://127.0.0.1:9001');
     socket.addEventListener('open', () => consoleLog('Connected to server', 'success'));
     socket.addEventListener('message', (event) => {
         const message = JSON.parse(event.data);
