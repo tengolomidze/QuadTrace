@@ -57,10 +57,10 @@ loadState();
 
 
 //INPUT SYSTEM
-const yMinInput = document.querySelector('.search-yMin');
-const yMaxInput = document.querySelector('.search-yMax');
-const searchRadiusInput = document.querySelector('.search-radius');
-const searchTilesInput = document.querySelector('.search-tiles');
+const yMinInput = document.getElementById('search-yMin');
+const yMaxInput = document.getElementById('search-yMax');
+const searchRadiusInput = document.getElementById('search-radius');
+const searchTilesInput = document.getElementById('search-tiles');
 yMinInput.value = yMin;
 yMaxInput.value = yMax;
 searchRadiusInput.value = searchRadius;
@@ -95,12 +95,12 @@ setTimeout(() => {
 setInterval(saveState, 500)
 
 //BLOCK SELECTOR
-const block0 = document.querySelector('.block-0');
-const block1 = document.querySelector('.block-1');
-const block2 = document.querySelector('.block-2');
-const block3 = document.querySelector('.block-3');
-const block4 = document.querySelector('.block-4');
-const block5 = document.querySelector('.block-5');
+const block0 = document.getElementById('block-0');
+const block1 = document.getElementById('block-1');
+const block2 = document.getElementById('block-2');
+const block3 = document.getElementById('block-3');
+const block4 = document.getElementById('block-4');
+const block5 = document.getElementById('block-5');
 setTimeout(() => {
     block0.addEventListener("click", () => {currentBlockType = 0; updateButtonStates()});
     block1.addEventListener("click", () => {currentBlockType = 1; updateButtonStates()});
@@ -145,12 +145,12 @@ updateButtonStates()
 
 // SEARCH AND CONSOLE LOGIC
 let socket = null;
-const consoleOutput = document.querySelector('.console-output');
-const progressSection = document.querySelector('.progress-section');
-const progressFill = document.querySelector('.progress-bar-fill');
-const progressText = document.querySelector('.progress-text');
-const searchBtn = document.querySelector('.search-btn');
-const stopBtn = document.querySelector('.stop-btn');
+const consoleOutput = document.getElementById('console-output');
+const progressSection = document.getElementById('progress-section');
+const progressFill = document.getElementById('progress-bar-fill');
+const progressText = document.getElementById('progress-text');
+const searchBtn = document.getElementById('search-btn');
+const stopBtn = document.getElementById('stop-btn');
 
 const resetProgress = () => {
     if (progressSection) progressSection.style.display = 'none';
@@ -186,14 +186,14 @@ const consoleLog = (message, type = 'normal') => {
     consoleOutput.scrollTop = consoleOutput.scrollHeight;
 };
 const disableControls = () => {
-    const controls = document.querySelectorAll('.block, .clear-all, .rotate-left, .rotate-right, .search-yMin, .search-yMax, .search-radius, .search-tiles');
+    const controls = document.querySelectorAll('.block, #clear-all, #rotate-left, #rotate-right, #search-yMin, #search-yMax, #search-radius, #search-tiles');
     controls.forEach(ctrl => ctrl.disabled = true);
     isSearching = true;
     if (searchBtn) searchBtn.style.display = 'none';
     if (stopBtn) stopBtn.style.display = 'block';
 };
 const enableControls = () => {
-    const controls = document.querySelectorAll('.block, .clear-all, .rotate-left, .rotate-right, .search-yMin, .search-yMax, .search-radius, .search-tiles');
+    const controls = document.querySelectorAll('.block, #clear-all, #rotate-left, #rotate-right, #search-yMin, #search-yMax, #search-radius, #search-tiles');
     controls.forEach(ctrl => ctrl.disabled = false);
     isSearching = false;
     if (searchBtn) searchBtn.style.display = 'block';
@@ -277,7 +277,7 @@ setTimeout(() => {
         stopBtn.addEventListener('click', stopSearch);
 }, 0);
 
-let bestRadiusSpan = document.querySelector(".best-radius");
+let bestRadiusSpan = document.getElementById("best-radius");
 const calculatebestRadius = () => {
     let p = 1;
     blocks.forEach(block => {
@@ -288,7 +288,7 @@ const calculatebestRadius = () => {
     bestRadiusSpan.textContent = Math.round(Math.sqrt(volume/382)/10)*10/2;
 }
 
-const gameWrapper = document.querySelector('.game-wrapper');
+const gameWrapper = document.getElementById('game-wrapper');
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(45, gameWrapper.clientWidth / gameWrapper.clientHeight, 1, 10000);
 camera.position.set(10, 15, 20);
@@ -476,14 +476,14 @@ gameWrapper.addEventListener('pointerdown', (event) => {
 });
 
 gameWrapper.addEventListener('pointermove', (event) => {
-    if (Math.abs(event.clientX - startX) > 5 || Math.abs(event.clientY - startY) > 5) {
+    if (Math.abs(event.clientX - startX) > 12 || Math.abs(event.clientY - startY) > 12) {
         isDragging = true;
     }
 });
 
 gameWrapper.addEventListener('pointerup', (event) => {
-    if (event.button !== 0 || isDragging) return;
-    if(isSearching) return
+    if (isDragging) return;
+    if (isSearching) return
 
     const rect = gameWrapper.getBoundingClientRect();
     mouse.x = ((event.clientX - rect.left) / gameWrapper.clientWidth) * 2 - 1;
@@ -495,7 +495,7 @@ gameWrapper.addEventListener('pointerup', (event) => {
     if (intersects.length > 0) {
         const intersect = intersects[0];
 
-        if (isShiftDown) {
+        if (event.button === 2) {
             if (intersect.object !== plane) {
                 const meshPos = intersect.object.position;
                 const key = worldKey(Math.floor(meshPos.x), Math.floor(meshPos.y), Math.floor(meshPos.z));
@@ -510,7 +510,7 @@ gameWrapper.addEventListener('pointerup', (event) => {
                     blockMap.delete(key);
                 }
             }
-        } else {
+        } else if (event.button === 0) {
             const pos = intersect.point.clone().addScaledVector(intersect.face.normal, 0.5).floor();
             const key = worldKey(pos.x, pos.y, pos.z);
             if (blockMap.has(key)) return;
@@ -534,29 +534,15 @@ window.addEventListener('keydown', (event) => { if (event.key === 'Shift') isShi
 window.addEventListener('keyup', (event) => { if (event.key === 'Shift') isShiftDown = false; });
 rebuildBlocksInScene();
 
-const blockTypeButtons = {
-    1: document.querySelector('.bedrock'),
-};
-const setActiveBlockType = (type) => {
-    currentBlockType = type;
-    Object.entries(blockTypeButtons).forEach(([t, btn]) => {
-        if (btn) btn.classList.toggle('active', parseInt(t) === type);
-    });
-};
-Object.entries(blockTypeButtons).forEach(([t, btn]) => {
-    if (btn) btn.addEventListener('click', () => setActiveBlockType(parseInt(t)));
-});
-setActiveBlockType(currentBlockType);
-
-const clearAllBtn = document.querySelector('.clear-all');
+const clearAllBtn = document.getElementById('clear-all');
 if (clearAllBtn) clearAllBtn.addEventListener('click', clearAllBlocks);
 
-const rotateLeftBtn = document.querySelector('.rotate-left');
-const rotateRightBtn = document.querySelector('.rotate-right');
+const rotateLeftBtn = document.getElementById('rotate-left');
+const rotateRightBtn = document.getElementById('rotate-right');
 if (rotateLeftBtn) rotateLeftBtn.addEventListener('click', () => rotateBlocks('left'));
 if (rotateRightBtn) rotateRightBtn.addEventListener('click', () => rotateBlocks('right'));
 
-const compassContainer = document.querySelector('.compass-div');
+const compassContainer = document.getElementById('compass-div');
 const compassScene = new THREE.Scene();
 
 const compassCamera = new THREE.PerspectiveCamera(40, 1, 0.1, 100);

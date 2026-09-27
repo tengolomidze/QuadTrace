@@ -188,8 +188,6 @@ async def handle_client(websocket: WebSocketServerProtocol) -> None:
 
 async def main() -> None:
     start_http_server()
-    log(f"Serving web UI at http://{HOST}:{HTTP_PORT}")
-    log(f"WebSocket endpoint at ws://{HOST}:{WS_PORT}")
     async with websockets.serve(handle_client, HOST, WS_PORT):
         await asyncio.Future()
 
