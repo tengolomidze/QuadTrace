@@ -11,12 +11,12 @@
 
 ### Notes
 - Works on Minecraft 1.21.2+
+- Uses OpenCL with GPU for ultra-fast searching
 - Block rotations are identical across all Minecraft worlds, so seed is not required
-- If you are confused about how blocks are rotated in Minecraft, use `./directional_resource_pack/directional_resource_pack.zip`
 - While some blocks are rotated at 0°, 90°, 180°, 270°; others are rotated and mirrored - 0°, M0°, 180°, M180° 
 - 0° = 0°, 90° = M0°, 180° = 180°, 270° = M180°
 - Blocks that are rotated and mirrored, can be observed from sides and that's what green blocks are for
-- Uses OpenCL with GPU for ultra-fast searching
+- If you are confused about how blocks are rotated in Minecraft, use `./directional_resource_pack/directional_resource_pack.zip`
 
 ### Building
 -   `git clone https://github.com/tengolomidze/QuadTrace.git`
